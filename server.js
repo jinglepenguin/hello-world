@@ -13,6 +13,11 @@ app.get('/angular', function(req, res){
     res.redirect('/index.html');
 });
 
+app.get('/test', function(req, res){
+    console.log('in /test');
+    res.redirect('/test.html');
+});
+
 
 app.listen(3000, function () {
   console.log('http://localhost:3000 is ready');
