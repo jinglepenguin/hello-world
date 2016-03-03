@@ -1,18 +1,48 @@
 <!doctype html>
 
-
-
-
 <html ng-app="penguinApp">
 	<head>
 		<script src="js/angular.min.js"></script>
-		<!--<script src="js/controller.js"></script> this one doesnt work because it's not being called...it needs to be binded somehow--> 
-		<script>var myApp = angular.module('penguinApp', []);</script>
+		<script src="js/controller.js"></script>
 		<title>Testing</title>
 	</head>
 	<body>
-		what's your name? <input type="text" ng-model="name"/>
-		<p>Hello {{name}}, This is a test page</p>
+		<div id="navbar">
+			<nav ng-click="">
+				<a href="#" ng-click="selected=''">Home</a>
+				<a href="#" ng-click="selected='ngRepeat'">ng-repeat</a>
+				<a href="#" ng-click="selected='2'">Second</a>
+				<a href="#" ng-click="selected='3'">Third</a>
+			</nav>
+		</div>
+		
+		<p ng-show=selected>You chose {{selected}}</p>
+		
+		<div ng-hide=selected>
+			<br/>
+			what's your name? <input type="text" ng-model="name"/>
+			<p>Hello {{name}}, This is a test page</p>
+		</div>
+		
+		<div ng-hide="(selected != 'ngRepeat')" ng-controller="ngRepeatCtrl">
+			
+			<h4>List of Objects: <span ng-model="ngRepeatCtrl.characters"></span></h4>
+			<p>Plain list:</p>
+			<ul>
+				<li ng-repeat = "character in characters ">
+					{{character.name + '|' + character.class}}
+				</li>
+			</ul>
+			
+			<p>List using key/value pair:</p>
+			<ul>
+				<li ng-repeat = "(key, value) in characters ">
+					{{key + ':' + value.name + '-' + value.class}}
+				</li>
+			</ul>
+			
+		</div>
+		
 	</body>
 </html>
 

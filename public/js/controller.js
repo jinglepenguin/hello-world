@@ -1,5 +1,14 @@
-angular.module('myApp').controller('AppCtrl', function($scope) {
-	$scope.message = 'Hello World!';  
-});
 
-var myApp = angular.module('penguinApp', []);
+
+//var myApp = angular.module('penguinApp', []);
+
+var myApp = angular.module('penguinApp', []).controller('ngRepeatCtrl', ngRepeatCtrl);
+
+function ngRepeatCtrl(){
+	this.characters = 
+	[{name:'sakura',class:'mage'}, 
+	{name:'tomoyo',class:'healer'}, 
+	{name:'shaoran',class:'knight'}];
+
+};
+
