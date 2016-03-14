@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="libraryApp">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+        <script src="js/libraryController.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to the Library</h1>
+        
+        <div ng-controller="libraryCtrl">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Available</td>
+                </tr>
+                <tr ng-repeat="book in libraryCtrl.books">
+                    <td ng-bind = "book.id"></td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.available}}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

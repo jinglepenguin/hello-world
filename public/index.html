@@ -1,14 +1,46 @@
 <html ng-app ="myApp">
     <head>
         <title>AngularJS Basic Example</title>
-		<!--
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-        -->
-		<script type='text/javascript' src="js/app.js" charset="UTF-8"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
         <script type='text/javascript' src="js/controller.js" charset="UTF-8"></script>
+
+        <script>
+            
+            var myApp=angular.module("myApp", []);
+            myApp.controller('AuthenticationCtrl', AuthenticationCtrl);
+            
+            function AuthenticationCtrl(){
+                this.username = '';
+                this.password = '';
+            }
+            
+            AuthenticationCtrl.prototype.hello = function(username) {
+                alert('hello ' + username);
+            };
+            
+            AuthenticationCtrl.prototype.login = function(username, password){
+                if(username == "x" && password == "x"){
+                    window.location = "/library_index.html";
+                } else if (username != '' && password != ''){
+                    alert('Please try again');
+                }
+            };
+            
+        </script>
+
     </head>
     <body>
-		<p>index</p>
-        <div class="container" ui-view=""></div>
+		<p>Please sign in</p>
+        <div id="authenticationDiv" ng-controller="AuthenticationCtrl as control">
+            <input type="text" ng-model="username"/>
+            <input type="password" ng-model="password"/>
+            
+            <p> hello 
+            <span ng-bind="username"/>
+            <span ng-bind="password"/>
+            </p>
+            
+            <button ng-click="control.login(username, password)">Login</button>
+        </div>
     </body>
 </html>
