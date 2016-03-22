@@ -7,20 +7,20 @@
     </head>
     <body>
         <h1>Welcome to the Library</h1>
-        
+
         <div ng-controller="libraryCtrl">
-            <table>
+            <table ng-model="books">
                 <tr>
                     <td>ID</td>
                     <td>Title</td>
                     <td>Author</td>
-                    <td>Available</td>
+                    <td>status</td>
                 </tr>
-                <tr ng-repeat="book in libraryCtrl.books">
-                    <td ng-bind = "book.id"></td>
+                <tr ng-repeat="book in books">
+                    <td>{{book.id}}</td>
                     <td>{{book.title}}</td>
                     <td>{{book.author}}</td>
-                    <td>{{book.available}}</td>
+                    <td>{{book.status}}</td>
                 </tr>
             </table>
         </div>
