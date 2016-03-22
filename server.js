@@ -1,6 +1,17 @@
 var express = require('express');
 var app = express();
 
+
+/** DB CONNECTION LOGIC **/
+var mariasql = require('mysql'); //currently using the mysql binding since can't get the mariasql to work properly
+var connection = mariasql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'PenguinMariaDB',
+    database: 'library'
+});
+
+
 app.get('/', function (req, res) {
     console.log('in /');
     res.send('Hello World!');
@@ -17,6 +28,7 @@ app.get('/test', function(req, res){
     console.log('in /test');
     res.redirect('/test.html');
 });
+
 
 
 app.listen(3000, function () {
@@ -59,26 +71,38 @@ app.get('/bubblesort', function(req, res){
    res.redirect('/index.html');
 });
 
-/** DB CONNECTION LOGIC **/
-var mariasql = require('mysql'); //currently using the mysql binding since can't get the mariasql to work properly
-var connection = mariasql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'PenguinMariaDB',
-    database: 'library'
+app.post('/getLibrarians', function(req, res){
+    console.log('getting librarians from DB');
+
+    console.dir('request: ' + req.body.username);
+
+    getLibrarians(connection);
+
+    console.log('finished');
+
+    res.redirect('/library_index.html');
 });
 
-connection.connect();
 
-connection.query('SELECT * FROM librarian', function(err, rows, field){
-    if(!err){
-        console.log('rows: ' + rows);
-    } else {
-        console.log('error');
-    }
-});
+function getLibrarians(connection){
+    var results;
 
-connection.end();
+    connection.connect();
+
+    connection.query('SELECT * FROM librarian', function(err, rows, field){
+        if(!err){
+            results = rows;
+            console.dir('rows: ' + rows);
+        } else {
+            results = 'error';
+            console.log('error');
+        }
+    });
+
+    connection.end();
+
+    return results;
+}
 
 /** RANDOM CODE SNIPPETS **/
 
