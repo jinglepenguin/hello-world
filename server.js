@@ -1,6 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var app = express();
 
+app.user(bodyParser.json());
 
 /** DB CONNECTION LOGIC **/
 var mariasql = require('mysql'); //currently using the mysql binding since can't get the mariasql to work properly
@@ -71,6 +74,7 @@ app.get('/bubblesort', function(req, res){
    res.redirect('/index.html');
 });
 
+
 app.post('/getLibrarians', function(req, res){
     console.log('getting librarians from DB');
 
@@ -92,7 +96,7 @@ function getLibrarians(connection){
     connection.query('SELECT * FROM librarian', function(err, rows, field){
         if(!err){
             results = rows;
-            console.dir('rows: ' + rows);
+            console.log('rows: ' + rows);
         } else {
             results = 'error';
             console.log('error');
